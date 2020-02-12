@@ -3,49 +3,70 @@
 #include "Vehicle.h"
 using namespace std;
 
-double readNumber();
-string compare(Vehicle vehicle, double number);
-void printDifference(Vehicle v, double discount);
-
+double readPriceNumber();
+int readEngineSizeNumber();
+void printDifference(Vehicle vahicle, double discount);
+void printComparedResult(int result);
 
 int main()
 {
-	Vehicle bmw("BMW", "black", 5000, 25567.98);
+	Vehicle bmw("BMW", "black", 5000, 25567.00);
 
-	double x = readNumber();
+	printDifference(bmw, readPriceNumber());
 
-	printDifference(bmw, x);
-
-	cout << compare(bmw, x) << endl;
-
+	printComparedResult(bmw.compareToEngineSize(readEngineSizeNumber()));
 
 	return 0;
 }
 
-void printDifference(Vehicle v, double discount) {
-	 cout << "The price of the " << v.getBrand() << " is " << v.getPrice() << " and the discount is " << 
-		 v.getPrice() - discount << endl;
+double readPriceNumber()
+{
+	double num = 0;
+	cout << "Enter price: ";
+	while (!(cin >> num))
+	{
+		cout << "ERROR: A number must be entered: ";
+		cin.clear();
+		cin.ignore(123, '\n');
+	}
+
+	cout << "Entered price is: " << num << endl;
+
+	return num;
 }
 
-string compare(Vehicle vehicle, double number)
+int readEngineSizeNumber()
 {
-	if (vehicle.getEngineSize() > number) {
-		return "Engine size is bigger!";
-	}
-	else if (vehicle.getEngineSize() < number)
+	int num;
+	cout << "Enter engine size: ";
+	while (!(cin >> num))
 	{
-		return "Engine size is smaller!";
+		cout << "ERROR: A number must be entered: ";
+		cin.clear();
+		cin.ignore(123, '\n');
+	}
+
+	cout << "Entered engine size is: " << num << endl;
+
+	return num;
+}
+
+
+void printDifference(Vehicle vahicle, double discount) {
+	cout << "The price of the " << vahicle.getBrand() << " is " << vahicle.getPrice() << " and the discount is " <<
+		vahicle.calculateDiscount(discount) << "\n" << endl;
+}
+
+void printComparedResult(int result)
+{
+	if (result == -1) {
+		cout << "Engine size is bigger than the entered number!" << "\n" << endl;
+	}
+	else if (result == 1){
+		cout << "Engine size is smaller than the entered number!" << "\n" << endl;
 	}
 	else {
-		return "Engine size is equal!";
+		cout << "Engine size is equal to the entered number!" << "\n" << endl;
 	}
-}
-
-double readNumber()
-{
-	double x;
-	cout << "Enter number: " << endl;
-	cin >> x;
-	return x;
 }
 
