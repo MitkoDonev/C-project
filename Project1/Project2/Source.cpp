@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
 #include "Date.h"
+#include "Friend.h"
 using namespace std;
 
-bool compareDateBetweenFriends(Date::Friend fr, Date::Friend secondFr);
+Friend compareFriends(Friend fr, Friend secondFr);
 
 int main()
 {
@@ -11,7 +12,7 @@ int main()
 	cout << "Enter string: " << endl;
 	cin >> str;
 
-	Date::Friend fr("Racho", "Yordanov", "Plamenov", 15, 02, 1995);
+	Friend fr("Az", "Yordanov", "Plamenov", 15, 12, 1990);
 
 	cout << "Do first and last name contain the given string: " << fr.nameContains(str) << endl;
 
@@ -24,8 +25,6 @@ int main()
 	cout << "Enter year: " << endl;
 	cin >> year;
 
-	cout << "Is the date equal to the birthdate: " << fr.compareDate(year, month, day) << endl;
-
 	int friendDay, firendMonth, freidnYear;
 
 	cout << "Enter the friends birthday: " << endl;
@@ -35,29 +34,31 @@ int main()
 	cout << "Enter the friends  year: " << endl;
 	cin >> freidnYear;
 
-	Date::Friend secondFr("Stefcho", "Ivanov", "Asparuhov", friendDay, firendMonth, freidnYear);
+	Friend secondFr("Stefcho", "Ivanov", "Asparuhov", friendDay, firendMonth, freidnYear);
 
-	cout << "The birthdates between both objects are " << compareDateBetweenFriends(fr, secondFr) << endl;
+	cout << "Is the date equal to the birthdate: " << fr.isOlderThan(secondFr) << endl;
+
+	Friend older = compareFriends(fr, secondFr);
 
 	return 0;
 }
 
-bool compareDateBetweenFriends (Date::Friend fr, Date::Friend secondFr)
+Friend compareFriends (Friend fr, Friend secondFr)
 {
-	if (fr.getBirthYear() != secondFr.getBirthYear())
+	if (fr.getBirthYear() <= secondFr.getBirthYear())
 	{
-		return false;
+		return secondFr;
 	}
 
-	if (fr.getBirthMonth() != secondFr.getBirthMonth())
+	if (fr.getBirthMonth() <= secondFr.getBirthMonth())
 	{
-		return false;
+		return secondFr;
 	}
 
-	if (fr.getBirthday() != secondFr.getBirthday())
+	if (fr.getBirthday() <= secondFr.getBirthday())
 	{
-		return false;
+		return secondFr;
 	}
 
-	return true;
+	return fr;
 }
