@@ -14,10 +14,10 @@ private:
 public:
 	Vehicle(string br, string cl, int eng, double pr)
 	{
-		brand = br;
-		color = cl;
-		engineSize = eng;
-		price = pr;
+		this->brand = br;
+		this->color = cl;
+		this->engineSize = eng;
+		this->price = pr;
 	}
 
 
